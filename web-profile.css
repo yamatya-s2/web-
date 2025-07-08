@@ -1,0 +1,338 @@
+/* Vanta.js 背景用 */
+#background {
+  position: fixed; /* 背景として全画面に固定 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 背面に配置 */
+}
+
+/* 上に置く要素 */
+.content {
+  position: relative;
+  z-index: 1; /* 前面に配置 */
+  color: white;
+  padding: 50px;
+  text-align: center;
+}
+/*タイトルテキスト設定*/
+.home-text {
+  text-align: left;
+  
+}
+h1.title{
+font-size : clamp(16px, 6vw, 100px);
+  text-align: center;
+
+}
+h3.title{
+font-size : clamp(8px, 2vw, 40px);
+}
+
+a {
+  text-decoration: none;"
+}
+/*こっからtitle変更*/
+.title-container {
+  position: relative;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; 
+  overflow: hidden;
+}
+
+.title-switch {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  font-size: clamp(20px, 8vw, 80px);
+  color: white;
+  text-align: center;
+  user-select: text;
+  line-height: 1.4;
+  white-space: normal;
+  width: 100%;
+  margin: 0;
+}
+
+.title-switch.active {
+  opacity: 1;
+}
+
+#jp-title {
+  font-size: clamp(16px, 7vw, 60px);
+}
+
+.home-text {
+  color: white;
+  text-align: center;
+  font-size: clamp(12px, 2vw, 24px);
+  line-height: 1.5;
+  margin: 0 auto;
+  color: rgb(170,170,170);
+}
+
+/*ここまでがtitle変更*/
+
+
+h1{
+font-size : clamp(16px, 5vw, 80px);
+ text-align: left;
+
+}
+
+
+/*ヘッダー*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px -7px rgba(255, 255, 255, 0.35);
+}
+
+.nav-link{
+ font-size: clamp(14px, 1.5vw, 30px);
+
+
+}
+.nav {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.site-name {
+  font-size: 24px;
+  font-size : clamp(15px, 1.8vw, 24px);
+
+  font-weight: bold;
+  color: white;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  transition: max-height 0.3s ease;
+}
+.menu.open {
+  max-height: 500px; /* モバイルメニュー開いた時の高さ */
+}
+
+.menu li {
+  padding: 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 5px;
+  user-select: none;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.menu a.active,
+.menu a:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  user-select: none;
+}
+
+/* モバイル時 */
+@media (max-width: 750px) {
+  .menu {
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* ヘッダー高さに合わせる */
+    right: 0;
+    background: rgba(0,0,0,0.85);
+    width: 200px;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 0 0 0 8px;
+  }
+  .menu.open {
+    max-height: 500px; /* 開いた時 */
+  }
+  .menu li {
+    margin: 10px 0;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+
+/* セクションの設定*/
+    .hidden-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto 100px;
+    }
+    .hidden-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section {
+      margin-bottom: 100px;
+     scroll-margin-top: 170px; /* ヘッダーの高さと一致させる*/
+    }
+
+
+/*フッター*/
+.footer {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px -7px rgba(255, 255, 255, 0.35);
+}
+/*
+リンク
+*/
+.account-box {
+  width: fit-content;
+  overflow: hidden;
+}
+
+.account-link {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  width: 40px;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+
+}
+
+.account-link:hover {
+  width: 200px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.account-name {
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.account-link:hover .account-name {
+  opacity: 1;
+}
+
+/*
+ネタ
+*/
+.shake-text {
+  display: inline-block;
+  transition: transform 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.shake-text:hover {
+  animation: shake 0.2s infinite;
+}
+
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.rainbow-text:hover {
+  animation: Rainbow 1.5s linear infinite;
+}
+
+
+.rainbow-text {
+  color: white;
+
+}
+
+@keyframes Rainbow{
+      0%{color:#ff0053;}
+    12%{color:#ff5353;}
+    24%{color:#ffcf53;}
+    36%{color:#e8ff53;}
+    48%{color:#53ff5d;}
+    60%{color:#53ffbc;}
+    72%{color:#5393ff;}
+    84%{color:#ca53ff;}
+    100%{color:#ff53bd;}
+  
+}
