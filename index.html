@@ -1,71 +1,117 @@
-<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="yamatya(やまちゃ)のプロフィール">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="tlmrHZmFzCHQvKpLCiLdDE9ZyXk_SwM5Afq8CZfngq4" />
-<title>やまちゃのProfile</title>
-  <link rel="stylesheet" href="web-profile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yamatyaのweb</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
   
-  <div id="background" class="background">
-
+<div class="page-wrapper" id="wrapper">
+  <!-- ローディング画面 -->
+  <div class="boot-screen">
+    <div class="logo"></div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
   </div>
-  <header class="header">
-   
-    <nav class="nav">
-      <div class="nav-left">
-        <img src="https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png" alt="アイコン" class="logo">
-        <div class="site-name"><a href="#mein"class=" rainbow-text">やまちゃ</a></div>
-      </div>
-    
-      
- <div class="nav-right">
-  <ul class="menu"> 
 
-    <li><a href="#about" class="nav-link">About me</a></li>
-    <li><a href="#skill" class="nav-link">Learning & Skills</a></li>
-    <li><a href="#projects" class="nav-link">Projects</a></li>
-    <li><a href="#next" class="nav-link">What's Next</a></li>
-    <li><a href="#contact" class="nav-link">Accounts</a></li>
-  </ul>
-  <div class="hamburger">&#9776;</div> <!-- ハンバーガーアイコン -->
-</div>
-    </nav>
-  
+  <!-- Vanta背景エリア -->
+  <div id="hello">
+    <h1 id="title">Hello!</h1>
+  </div>
+
+  <!-- ヘッダー -->
+<!-- トリガー用の空div -->
+<div id="header-trigger"></div>
+
+<!-- ヘッダー本体 -->
+<div id="header-box">
+  <header>
+    <div class="header-inner">yamatya</div>
   </header>
-  <div class="content">
-    <section id="mein">
-        <div class="title-container">
-      <h1 class="title title-switch ">Not just more—better.</h1>
-      <h1 class="title title-switch "id="jp-title">"ただ多い"だけでなく、<br>より良いものを</h1>
-      </div>
-      
-      <h3 class="title home-text">CPU制作からゲーム開発まで、いろんなことに挑戦している学生です。</h3>
-    </section>
-    <section id="about"class="section hidden-section">
-      <h1>About me</h1>
-     <p style="text-align: left;"> 小1の頃からプログラミングに興味を持ち、今はアセンブリプログラミングからゲーム制作までいろいろなことをしています。<br>
-特に低レイヤー層について興味があり独学で学んでいます。<br>
-将来はOSを一人で作ってみたいなーと思ってます。</p>
-    </section>
-    
-    <section id="skill"class="section hidden-section">
-      <h1>Learning & Skills</h1>Learning と Skills　で色を分けて書く</section>
-    
-    <section id="projects"class="section hidden-section">
-      <h1>Projects</h1>代表作のみ、もっとみたいなら別に誘導</section>
-    
-    <section id="next"class="section hidden-section">
-      <h1>What's Next</h1>やりたいこと、今やってること</section>
-    
-    <section id="contact"class="section hidden-section">
+</div>
+
+<!-- プレースホルダー：固定時にレイアウト崩れを防ぐ -->
+<div id="placeholder" class="placeholder"></div>
+
+
+  <!-- メイン本文 -->
+  <main>
+
+<!-- 自己紹介-->
+   <h1>自己紹介</h1>
+     小1の頃からプログラミングに興味を持ち、今はアセンブリプログラミングからゲーム制作までいろいろなことをしています。
+特に低レイヤー層について興味があり独学で学んでいます。
+将来はOSを一人で作ってみたいなーと思ってます。
+   <h1>スキル</h1>
+     Assembly,C,C++,HTML,scratch,binary
+
+<!-- プロジェクト -->
+   <h1>プロジェクト</h1>
+Void Time Trio p4,p5
+OS,Blue Stellar(仮名)
+IBM5150 Emulator
+MATCHA CPU
+UT_AU;
+Original game;未明
+<!-- 使用PC -->
+   <h1>使用機器</h1>
+android Galaxy
+iphone
+Mac book ari 2020 m1 8GBRAM 256GBSSD
+windows PC
+IPad
+raspberry pi4 modelA 8GB
+raspberry pi3 modelB 8GB
+
+<!-- おすすめ自作サイト -->
+   <h1>yamatya作のおすすめサイト</h1>
+Void Time Trio
+     
+ 
+<!-- サイトコマンド -->
+    <h1>サイトコマンド</h1>
+
+   
+ <p class="shake-text">もう一回ローディング画面を見たくないですか?👉</p>
+<button class="rainbow-text" onclick="reboot()" >Reboot Now</button>
+<h1></h1>
+     
+
+     
+   <p class="shake-text">googleイースターエッグを体験しよう👉</p>  
+      <div>
+      <label>Rotations: 
+        <input type="number" id="rotateCount" min="1" max="20" value="1">
+      </label>
+      <button id="rotateBtn">Spin</button>
+    </div>
+     
+<h1></h1>     
+ <p class="shake-text">ハイライト（文字選択したときの青いやつ）が虹色になる魔法をかけましょう👉</p>
+<label class="switch-label">
+  <input type="checkbox" id="selectionToggleSwitch">
+  <span class="slider"></span>
+  <span class="magic-label" id="magicLabel">魔法OFF</span>
+</label>
+
+
+<h1></h1>
+ <p class="shake-text">某ニコニコのコメントを召喚しよう👉</p>
+<button class="rainbow-text" id="summonBtn" >コメントを召喚!!</button>
+<div id="marqueeContainer"></div>
+
+<h1></h1>
+ <p class="shake-text">このサイトをハッキングしてみよう!!(リロードしたら戻るよ)👉</p>
+<button class="rainbow-text" onclick="hack_page()" >sudo su</button>
+<h1></h1>
+
+
+
+
+
+ <section id="contact"class="section hidden-section">
       <h1>Accounts</h1>
       <div class="account-box">
   <a href="https://github.com/yamatya-s2" class="account-link">
@@ -97,7 +143,7 @@
     <span class="account-name">yamatya7</span>
   </a>
       
-                   <a href="https://www.youtube.com/@yamatya7" class="account-link">
+                   <a href="https://www.youtube.com/@yamatya8" class="account-link">
     <img src="images/youtube.png" alt="Profile" class="avatar" >
     <span class="account-name">yamatya8</span>
   </a>
@@ -106,13 +152,30 @@
     
     
     </section>
-  </div>
-  
+<details>
+<summary>クレジット</summary>
+
+<h5>背景</h5> 
+<p>VantaJS</p>
+<h5>サイトコマンド</h5> 
+<p>chatGPT</p>
+</details>
+
   <footer class="footer">
     <p>© 2025 </p>
   <p class="shake-text">やまちゃ</p>
     <p> All rights reserved.</p>
 </footer>
-  <script src="web-profile.js"></script>
+  </div>
+  </main>
 
+  <!-- スクリプト -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script src="script.js"></script>
+  
+  
+  
+  
 </body>
+</html>
