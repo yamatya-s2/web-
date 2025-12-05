@@ -1,232 +1,136 @@
-/* Vanta.js 背景用 */
-#background {
-  position: fixed; /* 背景として全画面に固定 */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* 背面に配置 */
-}
-
-/* 上に置く要素 */
-.content {
-  position: relative;
-  z-index: 1; /* 前面に配置 */
+/* ==== 全体設定 ==== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: black;
+  overflow-x: hidden;
+  height: 100vh;
   color: white;
-  padding: 50px;
-  text-align: center;
-}
-/*タイトルテキスト設定*/
-.home-text {
-  text-align: left;
-  
-}
-h1.title{
-font-size : clamp(16px, 6vw, 100px);
-  text-align: center;
-
-}
-h3.title{
-font-size : clamp(8px, 2vw, 40px);
 }
 
-a {
-  text-decoration: none;"
-}
-/*こっからtitle変更*/
-.title-container {
-  position: relative;
-  height: 300px;
+/* ==== レイヤー関係 ====
+  上から順に：
+  1. ヘッダー（通常スクロール）
+  2. Vanta背景 (#hello)
+  3. ローディング画面 (.boot-screen) ← Vantaの背後
+*/
+
+/* --- ローディング画面（背面） --- */
+.boot-screen {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; 
-  overflow: hidden;
-}
-
-.title-switch {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  font-size: clamp(20px, 8vw, 80px);
-  color: white;
-  text-align: center;
-  user-select: text;
-  line-height: 1.4;
-  white-space: normal;
   width: 100%;
-  margin: 0;
-}
-
-.title-switch.active {
-  opacity: 1;
-}
-
-#jp-title {
-  font-size: clamp(16px, 7vw, 60px);
-}
-
-.home-text {
-  color: white;
-  text-align: center;
-  font-size: clamp(12px, 2vw, 24px);
-  line-height: 1.5;
-  margin: 0 auto;
-  color: rgb(170,170,170);
-}
-
-/*ここまでがtitle変更*/
-
-
-h1{
-font-size : clamp(16px, 5vw, 80px);
- text-align: left;
-
-}
-
-
-/*ヘッダー*/
-.header {
+  height: 100%;
+  background-color: #000;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 20px -7px rgba(255, 255, 255, 0.35);
-}
-
-.nav-link{
- font-size: clamp(14px, 1.5vw, 30px);
-
-
-}
-.nav {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-}
-
-
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  z-index: 3; /* 背景扱い（Vantaより下） */
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 1s; /* 1秒後に消える */
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwojcdkA4bTEKxgae7TEuTtK1WClnBIFra5w&s');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
 }
 
-.site-name {
-  font-size: 24px;
-  font-size : clamp(15px, 1.8vw, 24px);
-
-  font-weight: bold;
-  color: white;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-  transition: max-height 0.3s ease;
-}
-.menu.open {
-  max-height: 500px; /* モバイルメニュー開いた時の高さ */
-}
-
-.menu li {
-  padding: 0;
-}
-
-.menu a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 5px;
-  user-select: none;
+.progress-bar {
+  width: 300px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  position: relative;
 }
 
-.menu a.active,
-.menu a:hover {
-  background-color: rgba(255,255,255,0.2);
+.progress {
+  height: 100%;
+  width: 0%;
+  background-color: white;
+  border-radius: 3px;
+  transition: width 1.8s ease-in-out;
 }
 
-.hamburger {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+/* --- Vanta.js背景 --- */
+#hello {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#title {
   color: white;
-  user-select: none;
+  font-size: clamp(2rem, 12vw, 4rem);
+  text-shadow: 0 0 10px #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
 
-/* モバイル時 */
-@media (max-width: 750px) {
-  .menu {
-    flex-direction: column;
-    position: absolute;
-    top: 60px; /* ヘッダー高さに合わせる */
-    right: 0;
-    background: rgba(0,0,0,0.85);
-    width: 200px;
-    max-height: 0;
-    overflow: hidden;
-    border-radius: 0 0 0 8px;
-  }
-  .menu.open {
-    max-height: 500px; /* 開いた時 */
-  }
-  .menu li {
-    margin: 10px 0;
-  }
-  .hamburger {
-    display: block;
-  }
+/* --- ヘッダー --- */
+#header-box {
+  width: 100%;
+  backdrop-filter: blur(10px);
+  padding: 1em;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 
-/* セクションの設定*/
-    .hidden-section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s ease;
-      padding: 80px 20px;
-      max-width: 800px;
-      margin: 0 auto 100px;
-    }
-    .hidden-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+#header-trigger {
+  height: 1px;
+}
 
-    section {
-      margin-bottom: 100px;
-     scroll-margin-top: 170px; /* ヘッダーの高さと一致させる*/
-    }
+#placeholder {
+  display: none;
+}
 
+#placeholder.active {
+  display: block;
+}
 
-/*フッター*/
+/* --- 本文 --- */
+main {
+  padding: 2em;
+}
+
+button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* --- フッター --- */
 .footer {
   position: relative;
   top: 0;
@@ -238,13 +142,12 @@ font-size : clamp(16px, 5vw, 80px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 1;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 20px -7px rgba(255, 255, 255, 0.35);
 }
-/*
-リンク
-*/
+
+/* --- リンク（アカウント） --- */
 .account-box {
   width: fit-content;
   overflow: hidden;
@@ -262,7 +165,6 @@ font-size : clamp(16px, 5vw, 80px);
   transition: width 0.3s ease;
   overflow: hidden;
   white-space: nowrap;
-
 }
 
 .account-link:hover {
@@ -286,9 +188,7 @@ font-size : clamp(16px, 5vw, 80px);
   opacity: 1;
 }
 
-/*
-ネタ
-*/
+/* --- ネタ文字装飾 --- */
 .shake-text {
   display: inline-block;
   transition: transform 0.1s ease-in-out;
@@ -298,7 +198,6 @@ font-size : clamp(16px, 5vw, 80px);
 .shake-text:hover {
   animation: shake 0.2s infinite;
 }
-
 
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -314,25 +213,133 @@ font-size : clamp(16px, 5vw, 80px);
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+.rainbow-text {
+  color: black;
+}
+
 .rainbow-text:hover {
   animation: Rainbow 1.5s linear infinite;
 }
 
+@keyframes Rainbow {
+  0% { color: #ff0053; }
+  12% { color: #ff5353; }
+  24% { color: #ffcf53; }
+  36% { color: #e8ff53; }
+  48% { color: #53ff5d; }
+  60% { color: #53ffbc; }
+  72% { color: #5393ff; }
+  84% { color: #ca53ff; }
+  100% { color: #ff53bd; }
+}
 
-.rainbow-text {
-  color: white;
+
+
+/*サイトコマンド*/
+/*reboot 選択色変換 画面回転*/
+
+
+    .page-wrapper {
+      width: 100vw;
+      height: 100vh;
+      transform-origin: center center;
+      transition: transform 2s ease;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 6px;
+      font-size: 1rem;
+      text-align: center;
+      margin: 10px;
+    }
+
+
+.switch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.switch-label input {
+  display: none;
+}
+
+.slider {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background: #ccc;
+  border-radius: 50px;
+  transition: background 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 2px;
+  top: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background: #66bb6a;
+}
+
+input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+.magic-label {
+  font-weight: bold;
+}
+
+
+
+
+
+#marqueeContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+      z-index:9999;
 
 }
 
-@keyframes Rainbow{
-      0%{color:#ff0053;}
-    12%{color:#ff5353;}
-    24%{color:#ffcf53;}
-    36%{color:#e8ff53;}
-    48%{color:#53ff5d;}
-    60%{color:#53ffbc;}
-    72%{color:#5393ff;}
-    84%{color:#ca53ff;}
-    100%{color:#ff53bd;}
-  
+.marquee-text {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 20px;
+  animation: scrollLeft 5s linear forwards;
+   z-index:9999;
+   
+}
+
+@keyframes scrollLeft {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100%;
+  }
 }
