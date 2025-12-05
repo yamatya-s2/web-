@@ -1,136 +1,241 @@
-/*
-vanta
-*/
-VANTA.GLOBE({
-  el: "#background",
-   mouseControls: true,
-  touchControls: true,
+// Vanta.js 背景初期化
+let vantaEffect = VANTA.NET({
+  el: "#hello",
+  mouseControls: true,
+  touchControls: false,
   gyroControls: false,
   minHeight: 200.00,
   minWidth: 200.00,
   scale: 1.00,
   scaleMobile: 1.00,
-  color: 0x6bff3f,
-  color2: 0xc8ffe1,
-  size: 1.70
-})
-
-/*==============================
-滑らか移動
-==============================*/
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        const offset = targetElement.getBoundingClientRect().top + window.scrollY;
-        const headerOffset = 90; // ← ヘッダーの高さに合わせて変更
-        const scrollToPosition = offset - headerOffset;
-
-        window.scrollTo({
-          top: scrollToPosition,
-          behavior: "smooth"
-        });
-      }
-    });
-  });
-
-
-
-/*==============================
-title切り替え
-==============================*/
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const titles = document.querySelectorAll(".title-switch");
-    let current = 0;
-
-    function switchTitle() {
-      titles.forEach((el, index) => {
-        el.classList.toggle("active", index === current);
-      });
-
-      current = (current + 1) % titles.length;
-    }
-
-    switchTitle(); // 初期表示
-    setInterval(switchTitle, 10000); // 3秒ごとに切り替え
-  });
-
-/*==============================
-セクションを隠す/表示する
-==============================*/
-
-
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.hidden-section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
-          section.classList.add('visible');
-        }
-      });
-    });
-
-/*==============================
-ハンバーガーメニューの開閉
-==============================*/
-const hamburger = document.querySelector('.hamburger');
-const menu = document.querySelector('.menu');
-
-hamburger.addEventListener('click', () => {
-  menu.classList.toggle('open');
-  hamburger.classList.toggle('open');
+  color: 0xffffff,
+  backgroundColor: 0x000000,
+  points: 15.00,
+  maxDistance: 29.00,
+  spacing: 18.00
 });
 
-// メニュークリック時に閉じてスクロール
-document.querySelectorAll('.menu a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
+// === 背景色のサイン波アニメーション ===
+let t = 0;
+function animateColor() {
+  const r = Math.floor(128 + 127 * Math.sin(t));
+  const g = Math.floor(128 + 127 * Math.sin(t + 2));
+  const b = Math.floor(128 + 127 * Math.sin(t + 4));
+  const distance = Math.floor(20 + 10 * Math.sin(t * 5));
 
-    const targetId = link.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
+  const hexColor = (r << 16) | (g << 8) | b;
+  vantaEffect.setOptions({ color: hexColor, maxDistance: distance });
 
-    if(targetElement){
-      const headerHeight = document.querySelector('.header').offsetHeight;
-      const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-      window.scrollTo({top: offsetTop, behavior: 'smooth'});
-    }
-    
-    // メニュー閉じる
-    menu.classList.remove('open');
-    hamburger.classList.remove('open');
-  });
-});
+  t += 0.001;
+  requestAnimationFrame(animateColor);
+}
+animateColor();
 
-// スクロールに合わせてメニューアクティブ切替
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-link');
-const headerHeight = document.querySelector('.header').offsetHeight;
 
-window.addEventListener('scroll', () => {
-  const scrollPos = window.scrollY || window.pageYOffset;
-  
-  let currentSectionId = null;
+//============
+//起動
+//============
 
-  // #mein はナビにないのでスキップして判定
-  for(let i = 1; i < sections.length; i++){
-    const section = sections[i];
-    const offsetTop = section.offsetTop - headerHeight - 10;
-    const offsetBottom = offsetTop + section.offsetHeight;
-    
-    if(scrollPos >= offsetTop && scrollPos < offsetBottom){
-      currentSectionId = section.id;
-      break;
-    }
+
+
+window.onload = function boot() {
+  const boot = document.querySelector('.boot-screen');
+  const progress = document.querySelector('.progress');
+
+  // boot画面を再表示
+  boot.style.opacity = "1";
+  boot.style.visibility = "visible";
+  boot.style.animation = "none";
+  void boot.offsetWidth;
+
+  // プログレスバーをいったん0%に
+  progress.style.transition = "none";
+  progress.style.width = "0%";
+  void progress.offsetWidth; 
+   
+  progress.style.transition = "width 0.8s ease-in-out";
+ 
+   
+  setTimeout(() => {
+    progress.style.width = "100%";
+  }, 20);
+
+  boot.style.animation = "fadeOut 1s ease forwards";
+  boot.style.animationDelay = "2s";
+}
+
+
+function reboot() {
+  const boot = document.querySelector('.boot-screen');
+  const progress = document.querySelector('.progress');
+
+  // boot画面を再表示
+  boot.style.opacity = "1";
+  boot.style.visibility = "visible";
+  boot.style.animation = "none";
+  void boot.offsetWidth;
+
+  // プログレスバーをいったん0%に
+  progress.style.transition = "none";
+  progress.style.width = "0%";
+  void progress.offsetWidth; // 強制再描画
+
+  // ここでtransitionを再設定して
+  progress.style.transition = "width 0.8s ease-in-out";
+　
+  setTimeout(() => {
+    progress.style.width = "100%";
+  }, 20); 
+  boot.style.animation = "fadeOut 1s ease forwards";
+  boot.style.animationDelay = "2s";
+}
+
+//============
+//ヘッダー
+//============
+const header = document.getElementById("header-box");
+const trigger = document.getElementById("header-trigger");
+const placeholder = document.getElementById("placeholder");
+
+function updatePlaceholderHeight() {
+  placeholder.style.height = header.offsetHeight + "px";
+}
+
+updatePlaceholderHeight();
+
+window.addEventListener('resize', updatePlaceholderHeight);
+
+const observer = new IntersectionObserver(([entry]) => {
+  const isAtTop = window.scrollY === 0;
+
+  if (!entry.isIntersecting && !isAtTop) {
+
+     
+    header.classList.add("fixed");
+    placeholder.classList.add("active");
+  } else {
+
+    header.classList.remove("fixed");
+    placeholder.classList.remove("active");
   }
+}, {
+  threshold: 0,
+  rootMargin: '0px 0px 0px 0px'
+});
 
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if(link.getAttribute('href') === `#${currentSectionId}`){
-      link.classList.add('active');
-    }
+observer.observe(trigger);
+
+
+
+
+//============
+//サイトコマンド
+//============
+
+
+function hack_page(){
+document.body.contentEditable = true;
+document.designMode = 'on';
+};
+
+
+
+
+
+// 初期の <style> タグ作成
+const styleTag = document.createElement('style');
+styleTag.id = 'selection-style';
+document.head.appendChild(styleTag);
+
+function rainbowColor(t) {
+  const h = t % 360;
+  return `hsl(${h}, 100%, 50%)`;
+}
+
+let selectionT = 0;
+let selectionInterval = null;
+
+function startRainbowSelection() {
+  if (selectionInterval) return;
+
+  selectionInterval = setInterval(() => {
+    const color = rainbowColor(selectionT);
+    styleTag.textContent = `
+      ::selection {
+        background: ${color};
+        color: white;
+      }
+    `;
+    selectionT += 3;
+  }, 100);
+}
+
+function stopRainbowSelection() {
+  clearInterval(selectionInterval);
+  selectionInterval = null;
+  styleTag.textContent = '';
+}
+
+// スイッチの切り替えに対応
+document.getElementById('selectionToggleSwitch').addEventListener('change', (e) => {
+  const label = document.getElementById('magicLabel');
+
+  if (e.target.checked) {
+    startRainbowSelection();
+    label.textContent = '魔法ON!!';
+  } else {
+    stopRainbowSelection();
+    label.textContent = '魔法OFF';
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const messages = [
+  "★━━━━━━━━━‥・",
+  "これすき",
+  "うぽつ",
+  "草",
+  "www",
+  "!?",
+  "(◠ڼ◠)"
+];
+document.getElementById("summonBtn").addEventListener("click", () => {
+  const container = document.getElementById("marqueeContainer");
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+  // テキスト要素作成
+  const text = document.createElement("div");
+  text.className = "marquee-text";
+  text.textContent = randomMessage;
+
+  // ★ ビューポートに基づいたY座標で召喚
+  const viewportTop = window.scrollY;
+  const viewportBottom = viewportTop + window.innerHeight;
+  const y = Math.floor(Math.random() * (viewportBottom - viewportTop - 30)) + viewportTop;
+  text.style.top = `${y}px`;
+
+  text.style.color = getRandomColor();
+
+  container.appendChild(text);
+
+  text.addEventListener("animationend", () => {
+    container.removeChild(text);
   });
 });
+
+// ランダムカラー生成
+function getRandomColor() {
+  return "#" + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, "0");
+}
